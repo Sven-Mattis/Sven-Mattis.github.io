@@ -12,7 +12,7 @@ window.onload = async function() {
     //  vis.startLight(2, "right", 4, true);
     //}, 8000);
     // new Particle( amount, color, radius, PosX, PosY, collisionMouse, collisionOther, collisionBorder, name)
-    var part = new Particle( 1500, "rgba(0,0,25,0)",50, 190, 100, false, false, true, true, true, "just a test", "hard", true, "rgba(255,100,0.01)", false, 100);
+    var part = new Particle( 500, "rgba(0,0,0,1)",5, 190, 100, true, true, true, true, true, "just a test", "hard", false, "rgba(255,100,0.01)", true, 100);
     part.render(100);
     // Clear after 10 seconds
       //setTimeout(() => {

@@ -717,11 +717,11 @@ class Particle{
                             if(connectRadius+radius+radius > distance){
                                 CTX.beginPath();
                                 CTX.moveTo(start, PosY);
-                                //CTX.lineTo(MOUSE.x, MOUSE.y);
+                                CTX.lineTo(MOUSE.x, MOUSE.y);
                                 // Half lines
                                 //CTX.quadraticCurveTo(MOUSE.x, MOUSE.y, start, PosY);
                                 // Curvy lines
-                                CTX.quadraticCurveTo(end*2, middle*2, MOUSE.x, MOUSE.y);
+                                //CTX.quadraticCurveTo(end*2, middle*2, MOUSE.x, MOUSE.y);
                                 // Curve to the half
                                 //CTX.quadraticCurveTo(MOUSE.x, MOUSE.y, start-radius*0.5, PosY);
                                 // Try your self yome coll effects

@@ -1,7 +1,7 @@
 window.onload = async function() {
   //               Visual(NUMBER ,      STRING,    NUMBER, STRING         , BOOLEAN);
   //               Visual(MouseRadius , Canvas ID, zIndex, backgroundColor, Messages);
-    var vis = new Visual(200, "#particle", "", "black");
+    var vis = new Visual(200, "#particle", "", "");
   //flashLight( Radius , Position Type, Height, Width, Attach to mouse, movement, PosX, PosY, speed);
     //vis.flashLight(25, "absolute", 5000, 5000, true)
   //spotLight( tempradius, tempcolor, tempposition, tempmouseAttach, tempmovement, PosX, PosY, tempduration)
@@ -12,7 +12,7 @@ window.onload = async function() {
     //  vis.startLight(2, "right", 4, true);
     //}, 8000);
     // new Particle( amount, color, radius, PosX, PosY, collisionMouse, collisionOther, collisionBorder, name)
-    var part = new Particle( 1500, "rgba(0,0,25,110)",50, 190, 100, false, false, true, true, true, "just a test", "hard", true, "rgba(255,100,0.01)", false, 100);
+    var part = new Particle( 1500, "rgba(0,0,25,0)",50, 190, 100, false, false, true, true, true, "just a test", "hard", true, "rgba(255,100,0.01)", false, 100);
     part.render(100);
     // Clear after 10 seconds
       //setTimeout(() => {

@@ -12,8 +12,27 @@ window.onload = async function() {
     //  vis.startLight(2, "right", 4, true);
     //}, 8000);
     // new Particle( amount, color, radius, PosX, PosY, collisionMouse, collisionOther, collisionBorder, name)
-    var part = new Particle( 500, "rgba(0,0,0,1)",5, 190, 100, true, true, true, true, true, "just a test", "hard", false, "rgba(255,100,0.01)", true, 100);
-    part.render(100);
+    var part = new Particle({
+      amount: 250,
+      color: "transparent",
+      pos: {
+        x: 199,
+        y: 99
+      },
+      collision: {
+        collisionMouse: true,
+        collisionOther: true,
+        collisionBorder: true
+      },
+      radius: 10,
+      type: "hard",
+      connect: {
+        connectColor: "rgba(0,0,0,0.15)",
+        connectNear: true,
+        connectRadius: 100
+      }
+    });
+    part.render(1);
     // Clear after 10 seconds
       //setTimeout(() => {
       //  part.clear()

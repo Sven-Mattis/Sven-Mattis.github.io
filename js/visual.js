@@ -1,4 +1,4 @@
-const version = "0.0.4.5";
+const version = "0.0.5.1";
 // Global variables
 let CANVAS, CTX, MESSAGES;
 let MOUSE = {
@@ -429,7 +429,42 @@ class Particle{
     // the Particle constructor
     // Color can also be a number, with a letter (r,g,b), to get Multiply Colors => 
     // 
-    constructor( amount, color, radius, PosX, PosY, collisionMouse, collisionOther, collisionBorder, negativeX, negativeY, name, type, connectMouse, connectColor, connectNear, connectRadius){
+    constructor({
+        amount: amount = 1,
+        color: color = "black",
+        radius: radius = 10,
+        pos: {
+            x: x = 100,
+            y: y = 100
+        } = {
+            x: 100,
+            y: 100
+        },
+        collision: {
+            collisionMouse: collisionMouse = false, 
+            collisionOther: collisionOther = false,
+            collisionBorder: collisionBorder = false
+        } = {
+            collisionMouse: false, 
+            collisionOther: false,
+            collisionBorder: false
+        },
+        negativeX: negativeX = false, 
+        negativeY: negativeY = false,
+        name: name = false, 
+        type: type = "hard",
+        connect: {
+            connectMouse: connectMouse = false, 
+            connectColor: connectColor = false, 
+            connectNear: connectNear = "rgba(0,0,0,0.25)",
+            connectRadius: connectRadius = 0
+        } = {
+            connectMouse: false, 
+            connectColor: false, 
+            connectNear: "rgba(0,0,0,0.25)",
+            connectRadius: 0
+        }
+    } = console.error("Failed to create new particle!")){
         // Set all
         const colors = ["red","green","yellow","pink","purple","black","orange","orangered","blue","gold","violet"];
         let verify = 0;
@@ -446,24 +481,29 @@ class Particle{
             }
             this.radius = radius;
             if(i != amount){
-                this.PosX = Math.round(Math.random()*(PosX*10));
-                this.PosY = Math.round(Math.random()*(PosY*10));
+                this.x = Math.round(Math.random()*(x*10));
+                this.y = Math.round(Math.random()*(y*10));
             } else {
-                this.PosX = PosX;
-                this.PosY = PosY;
+                this.x = x;
+                this.y = y;
             }
             this.collisionMouse = collisionMouse;
             this.collisionOther = collisionOther;
             this.collisionBorder = collisionBorder;
-            if(Math.round(Math.random()) == 0){
-                this.negativeX = false 
+            if(amount != 1){
+                if(Math.round(Math.random()) == 0){
+                    this.negativeX = false 
+                } else {
+                    this.negativeX = true
+                }
+                if(Math.round(Math.random()) == 0){
+                    this.negativeY = false 
+                } else {
+                    this.negativeY = true
+                }
             } else {
-                this.negativeX = true
-            }
-            if(Math.round(Math.random()) == 0){
-                this.negativeY = false 
-            } else {
-                this.negativeY = true
+                this.negativeX = negativeX;
+                this.negativeY = negativeY;
             }
             this.type = type;
             if(this.type === undefined){
@@ -485,8 +525,8 @@ class Particle{
                 type: this.type,
                 color: this.color,
                 radius: this.radius,
-                PosX: this.PosX,
-                PosY: this.PosY,
+                PosX: this.x,
+                PosY: this.y,
                 collisionMouse: this.collisionMouse,
                 collisionOther: this.collisionOther,
                 collisionBorder: this.collisionBorder,
@@ -717,11 +757,11 @@ class Particle{
                             if(connectRadius+radius+radius > distance){
                                 CTX.beginPath();
                                 CTX.moveTo(start, PosY);
-                                CTX.lineTo(MOUSE.x, MOUSE.y);
+                                //CTX.lineTo(MOUSE.x, MOUSE.y);
                                 // Half lines
                                 //CTX.quadraticCurveTo(MOUSE.x, MOUSE.y, start, PosY);
                                 // Curvy lines
-                                //CTX.quadraticCurveTo(end*2, middle*2, MOUSE.x, MOUSE.y);
+                                CTX.quadraticCurveTo(end*2, middle*2, MOUSE.x, MOUSE.y);
                                 // Curve to the half
                                 //CTX.quadraticCurveTo(MOUSE.x, MOUSE.y, start-radius*0.5, PosY);
                                 // Try your self yome coll effects

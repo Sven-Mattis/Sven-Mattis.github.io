@@ -68,7 +68,9 @@ class Visual{
             "\nz-index: "+z_index+"\n\n");
         }
     }
+    fps(){
 
+    }
     // FlashLight effect, here Because of it creates an DOM-Element, always accessable
     flashLight( tempradius, tempposition, tempheight, tempwidth, tempmouseAttach, tempmovement, PosX, PosY, tempduration){
         /* Methods for tempmovement
@@ -541,6 +543,98 @@ class Particle{
             })
         }
     }
+
+    interface({
+        function: functionName,
+        css: {
+            width: width = "100px",
+            height: height = "250px",
+            top: top = "5px",
+            right: right = "10px",
+            backgroundColor: bgC = "transparent",
+            borderRadius: borderRadius = "0px",
+            border: border,
+            boxShadow: boxShadow
+        } = {
+            width: "100px",
+            left: "250px",
+            top: "5px",
+        }
+
+        
+    }){
+        // If no FunctionName given stop
+        (functionName === undefined) ? console.error("No Function in \t Particle.interface({ })") :
+        // Lets set all
+        this.width = width;
+        this.height = height;
+        this.top = top;
+        this.right = right;
+        this.bgC = bgC;
+        this.borderRadius = borderRadius;
+        this.border = border;
+        this.boxShadow = boxShadow;
+
+        // Create the main DOM-Element
+        let mainObj = document.createElement("form");
+        mainObj.setAttribute("id", "Particle-Interface");
+        mainObj.setAttribute("onmouseout", functionName);
+        mainObj.style.position = "fixed";
+        mainObj.style.display = "flex";
+        mainObj.style.flexDirection = "column";
+        mainObj.style.alignItems = "center";
+        mainObj.style.justifyContent = "space-between";
+        mainObj.style.minWidth = this.width;
+        mainObj.style.minHeight = this.height;
+        mainObj.style.top = this.top;
+        mainObj.style.right = this.right;
+        mainObj.style.backgroundColor = this.bgC;
+        mainObj.style.borderRadius = this.borderRadius;
+        mainObj.style.border = this.border;
+        mainObj.style.boxShadow = this.boxShadow;
+        document.querySelector("body").appendChild(mainObj);
+
+        // HEADER
+        let header = document.createElement("h1");
+        header.innerHTML = "Interface"
+        header.style.pointerEvents = "none";
+        header.style.margin = "0px";
+        header.style.marginBottom = "10px";
+        header.style.color = "rgba(0,0,0,0.75)";
+        header.style.fontFamily = "monspace";
+        header.style.fontWeight = "100";
+        header.style.fontShadow = "1px 1px 2px black";
+        mainObj.appendChild(header);
+
+        // create the slider
+        let value = ["2000", "1000", "100"];
+        let headerText = ["Amount", "Radius", "ConnectRadius"];
+        for(var i=0; i<=2; i++){
+            // header
+            let header = document.createElement("h1");
+            header.innerHTML = headerText[i]
+            header.style.pointerEvents = "none";
+            header.style.margin = "0px";
+            header.style.marginBottom = "-10px";
+            header.style.color = "rgba(0,0,0,0.75)";
+            header.style.fontFamily = "monspace";
+            header.style.fontWeight = "100";
+            header.style.fontShadow = "1px 1px 2px black";
+            header.style.fontSize = "1.25rem";
+            mainObj.appendChild(header);
+            // slider
+            let slider = document.createElement("input");
+            slider.setAttribute("type", "range");
+            slider.setAttribute("id", headerText[i].toLowerCase());
+            slider.setAttribute("min", "0");
+            slider.setAttribute("max", value[i]);
+            slider.setAttribute("value", "500");
+            slider.setAttribute("class", "slider");
+            slider.style.margin = "10px";
+            mainObj.appendChild(slider);
+        }
+    }
+
     render( speed, curve){
         if(speed === undefined){
             speed=Math.random()*50;

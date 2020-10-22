@@ -11,7 +11,7 @@
     font-size: 6em;
 }
 #SMR:hover{
-    background: radia;
+    background: radial;
     color: orangered;
     text-shadow: 0px 0px 20px black;
 }
@@ -25,4 +25,30 @@
     position: fixed;
     height: 3rem;
     width: 25rem;
+}
+#interfaceDemo{
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    right: 10px;
+    top: 5px;
+    height: auto;
+    width: auto;
+    background-color: rgba(0,0,0,0.25);
+    border-radius: 10px;
+    z-index: 100;
+}
+.slider{
+    margin: 10px;
+}
+#header {
+    pointer-events: none;
+    margin: 0px;
+    margin-bottom: -10px;
+    color: rgba(0,0,0,0.75);
+    font-family: monospace;
+    font-weight: 100;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
 }

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="de">
     <head>
-		<meta charset="utf-8">
+        <meta charset="utf-8">
     </head>
     <body>
-        <script src="js/visual.js"></script>
-        <script src="js/main.js"></script>
-        <link rel="stylesheet" type="text/css" charset="utf-8" href="css/main.css"/>
+        <script src="JS/visual.js"></script>
+        <script src="JS/main.js"></script>
+        <link rel="stylesheet" type="text/css" charset="utf-8" href="CSS/main.css"> 
         <canvas id="particle">
             <!-- The Canvas for Particles Postiton will always fixed and 100% 100%-->
             Sorry, your Browser does not support Canvas. Plase Switch and come back.
@@ -16,6 +16,15 @@
         <p id="SMR"><!-- onclick="start()" onmouseover="startHover()" onmouseout="startNotHover()" -->Visual.js
             <div id="courser"></div>
         </p>
-        <p style="position: absolute; height: 1000%; width: 100%; top: 0px; left: 0px; z-index: -100;s"></p>
+        <p style="position: absolute; height: 1000%; width: 100%; top: 0px; left: 0px; z-index: -100;"></p>
+        <form id="interfaceDemo" onmouseout="update()">
+            <h1 id="header" style="margin-bottom: 10px;">Interface</h1>
+            <h1 id="header" style="font-size: 1.25rem;">Amount</h1>
+            <input type="range" min="0" max="2000" value="500" class="slider" id="amount">
+            <h1 id="header" style="font-size: 1.25rem;">Radius</h1>
+            <input type="range" min="0" max="100" value="10" class="slider" id="radius">
+            <h1 id="header" style="font-size: 1.25rem;">ConnectRadius</h1>
+            <input type="range" min="0" max="250" value="100" class="slider" id="connectRadius">
+        </form>
     </body>
 </html>

@@ -38,42 +38,49 @@ window.onload = async function() {
       //setTimeout(() => {
       //  part.clear()
       //}, 18000);
-  //part.interface({
-  //  function: "update()",
-  //  css: {
-  //    width: "100px",
-  //    height: "0",
-  //    top: "5px",
-  //    right: "10px",
-  //    backgroundColor: "rgba(0,0,0,0.1)",
-  //    borderRadius: "20px",
-  //    boxShadow: "1px 1px 4px black"
-  //  }
-  //})
+  part.interface({
+    function: "update()",
+    css: {
+      width: "100px",
+      height: "0",
+      top: "5px",
+      right: "10px",
+      backgroundColor: "rgba(0,0,0,0.1)",
+      borderRadius: "20px",
+      boxShadow: "1px 1px 4px black"
+    }
+  })
 }
 function update() {
-  var amount = document.querySelector("#amount").value/2;
-  var radius = document.querySelector("#radius").value/2;;
-  var conRadius = document.querySelector("#connectRadius").value/2;;
+  var amount = document.querySelector("#Amount").value/2;
+  var radius = document.querySelector("#Radius").value/2;;
+  var conRadius = document.querySelector("#ConnectRadius").value;
+  var colMouse = document.querySelector("#CollisionMouse").checked;
+  var colOther = document.querySelector("#CollisionOther").checked;
+  var colBorder = document.querySelector("#CollisionBorder").checked;
+  var conMouse = document.querySelector("#ConnectMouse").checked;
+  var conNear = document.querySelector("#ConnectNear").checked;
+  var color = document.querySelector("#Color").value;
   PARTICLE = [];
-  part = new Particle({
-      amount: amount,
-      color: "transparent",
+  new Particle({
+      amount: Math.round(amount),
+      color: color,
       pos: {
         x: 199,
         y: 99
       },
       collision: {
-        collisionMouse: true,
-        collisionOther: false,
-        collisionBorder: true
+        collisionMouse: colMouse,
+        collisionOther: colOther,
+        collisionBorder: colBorder
       },
-      radius: radius,
+      radius: Math.round(radius),
       type: "hard",
       connect: {
         connectColor: "rgba(0,0,0,0.15)",
-        connectNear: true,
-        connectRadius: conRadius
+        connectNear: conNear,
+        connectMouse: conMouse,
+        connectRadius: Math.round(conRadius)
       }
     });
 }

@@ -10,6 +10,22 @@ let MOUSE = {
 // they get multidimensional later
 let LIGHTS = [];
 let PARTICLE = [];
+function drag(e) {
+    dragOn = true
+    setTimeout(() => {
+        drop(e)
+    }, 1);
+}
+function drop(e) {
+    document.querySelector(e).style.left = (MOUSE.x - 100)+ "px";
+    document.querySelector(e).style.top = (MOUSE.y-20)+ "px";
+    if(dragOn){
+        drag(e)
+    }
+}
+function dragReset(){
+    dragOn = false;
+}
 
 // Handle the mousemove event
 // and check if a Light is attached to the mouse
@@ -564,7 +580,7 @@ class Particle{
         
     }){
         // If no FunctionName given stop
-        (functionName === undefined) ? console.error("No Function in \t Particle.interface({ })") :
+        (functionName === undefined) ? console.error("No Function given in \t Particle.interface({ })") :
         // Lets set all
         this.width = width;
         this.height = height;
@@ -580,6 +596,7 @@ class Particle{
         mainObj.setAttribute("id", "Particle-Interface");
         mainObj.setAttribute("onmouseout", functionName);
         mainObj.style.position = "fixed";
+        mainObj.style.zIndex = 1000;
         mainObj.style.display = "flex";
         mainObj.style.flexDirection = "column";
         mainObj.style.alignItems = "center";
@@ -587,7 +604,7 @@ class Particle{
         mainObj.style.minWidth = this.width;
         mainObj.style.minHeight = this.height;
         mainObj.style.top = this.top;
-        mainObj.style.right = this.right;
+        mainObj.style.left = (window.innerWidth - this.right);
         mainObj.style.backgroundColor = this.bgC;
         mainObj.style.borderRadius = this.borderRadius;
         mainObj.style.border = this.border;
@@ -596,8 +613,9 @@ class Particle{
 
         // HEADER
         let header = document.createElement("h1");
+        header.setAttribute("onmousedown", "drag('#Particle-Interface')");
+        header.setAttribute("onmouseup", "dragReset()");
         header.innerHTML = "Interface"
-        header.style.pointerEvents = "none";
         header.style.margin = "0px";
         header.style.marginBottom = "10px";
         header.style.color = "rgba(0,0,0,0.75)";
@@ -607,9 +625,9 @@ class Particle{
         mainObj.appendChild(header);
 
         // create the slider
-        let value = ["2000", "1000", "100"];
+        let value = ["2000", "250", "200"];
         let headerText = ["Amount", "Radius", "ConnectRadius"];
-        for(var i=0; i<=2; i++){
+        for(var i=0; i<=headerText.length-1; i++){
             // header
             let header = document.createElement("h1");
             header.innerHTML = headerText[i]
@@ -625,7 +643,7 @@ class Particle{
             // slider
             let slider = document.createElement("input");
             slider.setAttribute("type", "range");
-            slider.setAttribute("id", headerText[i].toLowerCase());
+            slider.setAttribute("id", headerText[i]);
             slider.setAttribute("min", "0");
             slider.setAttribute("max", value[i]);
             slider.setAttribute("value", "500");
@@ -633,6 +651,42 @@ class Particle{
             slider.style.margin = "10px";
             mainObj.appendChild(slider);
         }
+        // Create the Checkboxes
+        headerText = ["CollisionMouse", "CollisionOther", "CollisionBorder", "ConnectMouse", "ConnectNear"];
+        for(var i=0; i<=headerText.length-1; i++){
+            // header
+            let header = document.createElement("h1");
+            header.innerHTML = headerText[i]
+            header.style.pointerEvents = "none";
+            header.style.margin = "0px";
+            header.style.marginBottom = "-10px";
+            header.style.color = "rgba(0,0,0,0.75)";
+            header.style.fontFamily = "monspace";
+            header.style.fontWeight = "100";
+            header.style.fontShadow = "1px 1px 2px black";
+            header.style.fontSize = "1.25rem";
+            mainObj.appendChild(header);
+            // CheckBoxes
+            let slider = document.createElement("input");
+            slider.setAttribute("type", "checkbox");
+            slider.setAttribute("checked", "checked");
+            slider.setAttribute("id", headerText[i]);
+            slider.setAttribute("class", "slider");
+            slider.style.margin = "10px";
+            mainObj.appendChild(slider);
+        }
+        let slider = document.createElement("input");
+        slider.setAttribute("type", "text");
+        slider.setAttribute("id", "Color");
+        slider.setAttribute("class", "slider");
+        slider.setAttribute("value", "rgba(0,0,0,0)");
+        slider.style.margin = "10px";
+        slider.style.padding = "10px";
+        slider.style.border = "none";
+        slider.style.borderRadius = "10px";
+        slider.style.outline = "none";
+        slider.style.backgroundColor = "rgba(255,0,0,0.1)";
+        mainObj.appendChild(slider);
     }
 
     render( speed, curve){
@@ -851,11 +905,11 @@ class Particle{
                             if(connectRadius+radius+radius > distance){
                                 CTX.beginPath();
                                 CTX.moveTo(start, PosY);
-                                //CTX.lineTo(MOUSE.x, MOUSE.y);
+                                CTX.lineTo(MOUSE.x, MOUSE.y);
                                 // Half lines
                                 //CTX.quadraticCurveTo(MOUSE.x, MOUSE.y, start, PosY);
                                 // Curvy lines
-                                CTX.quadraticCurveTo(end*2, middle*2, MOUSE.x, MOUSE.y);
+                                //CTX.quadraticCurveTo(end*2, middle*2, MOUSE.x, MOUSE.y);
                                 // Curve to the half
                                 //CTX.quadraticCurveTo(MOUSE.x, MOUSE.y, start-radius*0.5, PosY);
                                 // Try your self yome coll effects

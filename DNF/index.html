@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Disjunktive Normalform
+        </title>
+        <link rel="stylesheet" href="style.css">
+        <script src="main.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <p>Disjunktive Normalform</p>
+        </div>
+        <div id="table">
+            <div class="row">
+                <p style="margin-left: 0.5rem;">A
+                <span style="margin-left: 2.5rem;">B</span>
+                <span style="margin-left: 2.5rem;">C</span>
+                <span style="margin-left: 4.5rem">Q</span></p>
+            </div>
+            <div class="row">
+                <input type="number" class="input" min="0" max="1" value="0">
+                <input type="number" class="input" min="0" max="1" value="0">
+                <input type="number" class="input" min="0" max="1" value="0">
+                <input class="erg" style="margin-left: 2rem" type="number" min="0" max="1" value="0">
+            </div>
+            <div class="row">
+                <input type="number" class="input" min="0" max="1" value="0">
+                <input type="number" class="input" min="0" max="1" value="0">
+                <input type="number" class="input" min="0" max="1" value="0">
+                <input class="erg" style="margin-left: 2rem" type="number" min="0" max="1" value="0">
+            </div>
+            <div class="row">
+                <input type="number" class="input" min="0" max="1" value="0">
+                <input type="number" class="input" min="0" max="1" value="0">
+                <input type="number" class="input" min="0" max="1" value="0">
+                <input class="erg" style="margin-left: 2rem" type="number" min="0" max="1" value="0">
+            </div>
+            <div class="row">
+                <input type="number" class="input" min="0" max="1" value="0">
+                <input type="number" class="input" min="0" max="1" value="0">
+                <input type="number" class="input" min="0" max="1" value="0">
+                <input class="erg" style="margin-left: 2rem" type="number" min="0" max="1" value="0">
+            </div>
+            <input type="submit" onclick="dnf()" id="send">
+        </div>
+        <div id="erg">
+            <p style="font-size: 1.5rem; padding-bottom: 1rem">Lösung:</p>
+            <p id="fillInResult"></p>
+        </div>
+    </body>
+</html>

@@ -30,8 +30,8 @@ function dragReset(){
 // Handle the mousemove event
 // and check if a Light is attached to the mouse
 window.onmousemove = () => {
-    MOUSE.y = window.event.clientY
-    MOUSE.x = window.event.clientX
+    MOUSE.y = window.pageYOffset+window.event.clientY;
+    MOUSE.x = window.pageXOffset+window.event.clientX;
     for(let i = 0; i < LIGHTS.length; i++){
         if(LIGHTS[i].mouseAttach == true){
             // set the Light if it is attached
@@ -43,7 +43,7 @@ window.onmousemove = () => {
 }
 
 
-window.onresize= () => {
+window.onresize = () => {
     CANVAS.height = window.innerHeight;
     CANVAS.width = window.innerWidth;
 }
@@ -766,29 +766,14 @@ class Particle{
                     } else
                     // Dont work atm
                     if(!collisionBorder){
-                        // Check border
-                        if(negativeX == true){
-                            end = start-speed;
-                        } else if(negativeX == false){
-                            end = start+speed;
-                        }
+						end = start+speed;
+						middle = PosY+speed
                         // reset if border hitted
                         if((start+radius) > window.innerWidth){
-                            end=100;
-                        } else if((start-radius) < -10) {
-                            end = window.innerWidth;
+                            end=Math.round( Math.random()*window.innerWidth*1.5)-window.innerWidth;
                         }
-                        // Check border
-                        if((PosY+radius) > window.innerHeight){
-                            PARTICLE[i].negativeY = false;
-                        } else if((PosY-radius) < -10) {
-                            PARTICLE[i].negativeY = true;
-                        }
-                        if(negativeY){
-                            // Reset only work for x or y atm
-                            middle = PosY+(speed+Math.round(Math.random())*0.5);
-                        } else if(!negativeY){
-                            middle = 10;
+                        if((middle+radius) > window.innerHeight){
+							middle = Math.round(Math.random()*window.innerHeight)-window.innerHeight;
                         }
                     }
                     // Check for Collison with the Mouse

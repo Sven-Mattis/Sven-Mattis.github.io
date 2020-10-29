@@ -33,7 +33,7 @@ window.onload = async function() {
         connectRadius: 100
       }
     });
-	part.render(1);
+	part.render(80);
     // Clear after 10 seconds
       //setTimeout(() => {
       //  part.clear()
@@ -61,7 +61,7 @@ function update() {
   var conMouse = document.querySelector("#ConnectMouse").checked;
   var conNear = document.querySelector("#ConnectNear").checked;
   var color = document.querySelector("#Color").value;
-  PARTICLE = [];
+  part.clear();
   new Particle({
       amount: Math.round(amount),
       color: color,
@@ -77,10 +77,91 @@ function update() {
       radius: Math.round(radius),
       type: "hard",
       connect: {
-        connectColor: "rgba(0,0,0,0.15)",
+        connectColor: color,
         connectNear: conNear,
         connectMouse: conMouse,
         connectRadius: Math.round(conRadius)
       }
     });
+}
+function start(){
+	part.clear();
+	document.getElementById("startVisual").style.transition = "linear 1s";
+	document.getElementById("startVisual").style.transform = "scale(1000)";
+	setTimeout(() => {
+	document.getElementById("startVisual").style.display = "none";
+  new Visual(200, "#startCanvas", -1, "black");
+  new Particle({
+    amount: 333,
+    color: "rgba(255, 100, 0, 0.4)",
+    radius: 2,
+    pos: {
+      x: 200,
+      x: 200
+    },
+    collision: {
+      collisionMouse: true,
+      collisionBorder: false
+    },
+    connect: {
+      connectColor: "",
+      connectNear: false,
+      connectMouse: false,
+      connectRadius: 0
+    },
+    negativeX: true, negativeY: true
+  });
+  new Particle({
+    amount: 333,
+    color: "rgba(255, 0, 0, 0.25)",
+    radius: 2,
+    pos: {
+      x: 200,
+      x: 200
+    },
+    collision: {
+      collisionMouse: true,
+      collisionBorder: false
+    },
+    connect: {
+      connectColor: "",
+      connectNear: false,
+      connectMouse: false,
+      connectRadius: 0
+    },
+    negativeX: true, negativeY: true
+  });
+  new Particle({
+    amount: 333,
+    color: "rgba(250, 100, 100, 0.25)",
+    radius: 2,
+    pos: {
+      x: 200,
+      x: 200
+    },
+    collision: {
+      collisionMouse: true,
+      collisionBorder: false
+    },
+    connect: {
+      connectColor: "",
+      connectNear: false,
+      connectMouse: false,
+      connectRadius: 0
+    },
+    negativeX: true, negativeY: true
+  });
+  document.getElementById("mainSite").style.display = "block";
+	}, 1000)
+	document.getElementById("clickNotice").style.display = "none";
+	document.getElementById("Particle-Interface").style.display = "none";
+}
+window.onscroll = () => {
+  if(window.pageYOffset < 1000 && window.pageYOffset > 100){
+    var b = 0.1;
+    document.getElementById("navbarLinks").style.backgroundColor = "rgba(255, 255 ,255 ,0." + window.pageYOffset + ")";
+    document.getElementById("navbarLinks").style.height = 100-window.pageYOffset/50 + "px";
+    document.getElementById("navbarLinks").style.top = -30+window.pageYOffset/1000 + "px";
+    document.getElementById("navbarLinks").style.boxShadow = "0px 0px " + window.pageYOffset/50 + "px black";
+  }
 }

@@ -2,6 +2,8 @@
 
 body{
     overflow-x: hidden;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 1.1rem;
 }
 
 #startVisual{
@@ -10,17 +12,17 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -100%);
-    text-shadow: 0px 5px 10px black;
+    text-shadow: 0px 3px 15px gray;
     font-family: 'Cinzel', serif;
     font-size: 6em;
 }
 #startVisual:hover{
     background: radial;
     color: orangered;
-    text-shadow: 0px 0px 20px black;
+    text-shadow: 0px 0px 20px gray;
 }
 #clickNotice{
-    text-shadow: 0px 5px 10px black;
+    text-shadow: 0px 0px 10px gray;
     top: 50%;
     right: 50%;
     transform: translate(50%, -200%);
@@ -59,18 +61,17 @@ body{
 
 
 
-
 /* Main Site */
 #mainSite{
 	display: none;
-	width: 100%;
 	height: 100%;
+	right: 0px;
 	left: 0px;
 	top: 0px;
 }
 #navbarLinks{
     z-index: 100;
-	background-color: rgba(255,255,255,0.1);
+	background-color: rgba(255,255,255,0.0);
 	display: flex;
 	position: fixed;
 	top: -30px;
@@ -91,9 +92,6 @@ body{
 	width: 25%;
     overflow: hidden;
 }
-#navbarLinks li:hover a{
-	color: orangered;
-}
 a {
     text-decoration: none;
     color: black;
@@ -109,7 +107,7 @@ a {
 }
 #navbarLinks li a::after {
     content: "";
-    transition: transform 0.75s linear, border-color 1.5s linear;
+    transition: transform 0.75s linear, border-color 1s linear;
     min-height: 100%;
     min-width: 110%;
     transform: translateX(-101%);
@@ -126,7 +124,12 @@ a {
     transition: transform 0.75s linear, border-color 0.33s ease;
     border-color: orangered;
 }
-
+#navbarLinks .active a::after{
+    transform: translateX(0%) !important;
+    border-width: 1px;
+    transition: transform 0.75s linear, border-color 0.33s ease;
+    border-color: rgba(255, 68, 0, 1) !important;
+}
 #startCanvas{
     height: 100% !important;
     right: -10px !important;
@@ -134,6 +137,73 @@ a {
     top: -10px !important;
     display: block;
     position: relative !important;
-    box-shadow: 0px 0px 10px black;
+    box-shadow: -10px 15px 10px black;
     z-index: -1;
+}
+
+
+#siteContent {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+    align-items: center;
+    height: auto;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+}
+.content{
+	position: absolute;
+	display: flex;
+	justify-content: center;
+    align-items: center;
+    width: 100% !important;
+	left: 0px;
+    right: 0px;
+    min-height: 600px;
+    margin-top: 75px;
+}
+.show-items{
+	margin: 100px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px black;
+	min-height: 400px !important;
+	width: 400px !important;
+}
+.content-text{
+    z-index: 10;
+    border-bottom-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    background-color: white;
+    padding: 100px;
+    max-width: 600px;
+    min-width: 600px;
+}
+.header{
+    font-size: 2rem;
+    text-align: center;
+}
+.text{
+	margin-left: 20px;
+	margin-right: 20px;
+    text-align: center;
+}
+#footer{
+    position: fixed;
+    background: radial-gradient(at bottom left, rgba(255, 68, 0, 0.5) 0%, transparent 75%);
+    z-index: 10;
+    height: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: 350px;
+}
+
+.varible{
+    color: green;
+}
+.constructor{
+    color: orange;
 }

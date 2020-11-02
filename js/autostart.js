@@ -23,6 +23,10 @@ window.onload = async function() {
       }
     });
   part.render(8);
+  for(var i = 0; i < 10000; i++){
+    part.speed(i/100)
+  }
+  start();
 }
 function start(){
   vis.reset();
@@ -33,14 +37,14 @@ function start(){
   document.getElementById("startVisual").style.display = "none";
   topCanvas();
   vis.flashLight(45, "absolute", 5000, 5000, true);
-  firstLight = vis.softLight(100, "rgba(255, 0, 0, 0.5)", 40, "fixed", false, "middle", 10, 120);
-  secondLight = vis.softLight(100,"rgba(255, 20, 0, 0.5)", 30, "fixed", false, "middle", 20, 150);
-  thirdLight = vis.softLight(100, "rgba(255, 200, 0, 0.52)", 50, "fixed", false, "middle", 80, 110);
-  fourthLight = vis.softLight(100,"rgba(255, 0, 100, 0.55)", 40, "fixed", false, "middle", 30, 120);
-  fithLight = vis.softLight(100,  "rgba(25, 255, 0, 0.65)", 70, "fixed", false, "middle", 70, 190);
-  sixthLight = vis.softLight(100, "rgba(255, 0, 100, 0.6)", 60, "fixed", false, "middle", 10, 110);
-  eigthLight = vis.softLight(100, "rgba(255, 0, 0, 0.5)", 80, "fixed", false, "middle", 50, 160);
-  ninthLight = vis.softLight(100, "rgba(255, 0, 0, 0.4)", 20, "fixed", false, "middle", 60, 180);
+  firstLight = vis.softLight(100, "rgba(255, 0, 0, 0.5)", 40, "absolute", false, "middle", 10, 120);
+  secondLight = vis.softLight(100,"rgba(255, 20, 0, 0.5)", 30, "absolute", false, "middle", 20, 150);
+  thirdLight = vis.softLight(100, "rgba(255, 200, 0, 0.52)", 50, "absolute", false, "middle", 80, 110);
+  fourthLight = vis.softLight(100,"rgba(255, 0, 100, 0.55)", 40, "absolute", false, "middle", 30, 120);
+  fithLight = vis.softLight(100,  "rgba(25, 255, 0, 0.65)", 70, "absolute", false, "middle", 70, 190);
+  sixthLight = vis.softLight(100, "rgba(255, 0, 100, 0.6)", 60, "absolute", false, "middle", 10, 110);
+  eigthLight = vis.softLight(100, "rgba(255, 0, 0, 0.5)", 80, "absolute", false, "middle", 50, 160);
+  ninthLight = vis.softLight(100, "rgba(255, 0, 0, 0.4)", 20, "absolute", false, "middle", 60, 180);
   moveLights();
   document.getElementById("mainSite").style.display = "block";
 	}, 1000)
@@ -55,7 +59,6 @@ function start(){
 }
 window.onscroll = () => {
   moveLights();
-  document.getElementById("footer").style.height = window.pageYOffset/40+"px";
   if(window.pageYOffset < 1000 && window.pageYOffset > 100){
     let links = document.querySelectorAll("a");
     for(var i = 0; i < links.length; i++){
@@ -87,19 +90,16 @@ window.onscroll = () => {
     document.getElementById("navbarLinks").style.color = "rgba(200, 50, 0)";
     document.querySelector("#flashLight0").style.display = "none";
   }
-  if(window.pageYOffset >= window.height-window.innerHeight-100){
-    console.log("aisd")
-  }
 }
 function moveLights() {
-  vis.startLight(firstLight, {move: {x: 100-window.pageYOffset/100+"%", y: window.pageYOffset/100+"%"}}, 0.00000000000000000000000000000001, false);
-  vis.startLight(secondLight, {move: {x: window.pageYOffset/110+"%", y: window.pageYOffset/50+"%"}}, 0.00000000000000000000000000000001, false);
-  vis.startLight(thirdLight, {move: {x: 100-window.pageYOffset/92+"%", y: 50+window.pageYOffset/100+"%"}}, 0.00000000000000000000000000000001, false);
-  vis.startLight(fourthLight, {move: {x: window.pageYOffset/56+"%", y: window.pageYOffset/230+"%"}}, 0.00000000000000000000000000000001, false);
-  vis.startLight(fithLight, {move: {x: window.pageYOffset/70+"%", y: window.pageYOffset/40+"%"}}, 0.00000000000000000000000000000001, false);
-  vis.startLight(sixthLight, {move: {x: 100-window.pageYOffset/120+"%", y: 50+window.pageYOffset/600+"%"}}, 0.00000000000000000000000000000001, false);
-  vis.startLight(eigthLight, {move: {x: 100-window.pageYOffset/150+"%", y: window.pageYOffset/700+"%"}}, 0.00000000000000000000000000000001, false);
-  vis.startLight(ninthLight, {move: {x: window.pageYOffset/200+"%", y: window.pageYOffset/800+"%"}}, 0.00000000000000000000000000000001, false);
+  vis.startLight(firstLight, {move: {x: 100-window.pageYOffset/100+"%", y: window.pageYOffset/9+"%"}}, 0.00000000000000000000000000000001, false);
+  vis.startLight(secondLight, {move: {x: window.pageYOffset/110+"%", y: window.pageYOffset/8.8+"%"}}, 0.00000000000000000000000000000001, false);
+  vis.startLight(thirdLight, {move: {x: 100-window.pageYOffset/92+"%", y: 50+window.pageYOffset/9.7+"%"}}, 0.00000000000000000000000000000001, false);
+  vis.startLight(fourthLight, {move: {x: window.pageYOffset/56+"%", y: window.pageYOffset/8.6+"%"}}, 0.00000000000000000000000000000001, false);
+  vis.startLight(fithLight, {move: {x: window.pageYOffset/70+"%", y: window.pageYOffset/8.15+"%"}}, 0.00000000000000000000000000000001, false);
+  vis.startLight(sixthLight, {move: {x: 100-window.pageYOffset/120+"%", y: 50+window.pageYOffset/10.5+"%"}}, 0.00000000000000000000000000000001, false);
+  vis.startLight(eigthLight, {move: {x: 100-window.pageYOffset/150+"%", y: window.pageYOffset/8.2+"%"}}, 0.00000000000000000000000000000001, false);
+  vis.startLight(ninthLight, {move: {x: window.pageYOffset/200+"%", y: window.pageYOffset/8.3+"%"}}, 0.00000000000000000000000000000001, false);
 }
 function topCanvas(){
   let vis = new Visual(200, "#startCanvas", -1, "black");

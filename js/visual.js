@@ -1,6 +1,6 @@
 const version = "0.0.5.1";
 // Global variables
-let CANVAS, CTX, MESSAGES;
+let CANVAS, CTX, MESSAGES, CANVASNAME, SPEED = 0;
 let MOUSE = {
     x: null,
     y: null,
@@ -58,6 +58,7 @@ class Visual{
         }
         // get the canvas
         CANVAS = document.querySelector(canvasName);
+        CANVASNAME = canvasName;
         CTX = CANVAS.getContext("2d");
         // finish the global MOUSE-Array
         MOUSE = {
@@ -87,8 +88,16 @@ class Visual{
     fps(){
 
     }
+	reset(canvas){
+        if(canvas == undefined){
+            canvas = CANVAS;
+        } else {
+            canvas = docuemnt.querySelector(canvas);
+        }
+		canvas.style.display = "none";
+	}
     // FlashLight effect, here Because of it creates an DOM-Element, always accessable
-    flashLight( tempradius, tempposition, tempheight, tempwidth, tempmouseAttach, tempmovement, PosX, PosY, tempduration){
+    flashLight( tempradius, tempposition, tempheight, tempwidth, tempmouseAttach, PosX, PosY, tempduration){
         /* Methods for tempmovement
                     Variables here with temp --- to get no conflict with the names of the array
                     Array is more important than the Initialising
@@ -98,6 +107,7 @@ class Visual{
         // FLASHLIGHT[0][1].radius
 
         // Create a DOM-Element
+		let tempmovement = "";
         let flashLight = document.createElement("div");
 
         // Create the ID of the DOM-Element
@@ -124,7 +134,7 @@ class Visual{
         let height = tempheight;
         let width = tempwidth;
         let mouseAttach = tempmouseAttach;
-        let movement = tempmovement;
+		let movement = tempmovement;
         let duration = tempduration;
         // Check if a explicit Position is given or not and if set it
         if(PosX != null && PosY !=null){
@@ -145,11 +155,11 @@ class Visual{
         flashLight.style.width = width+"px";
         flashLight.style.height = height+"px";
         flashLight.style.position = position;
-        flashLight.style.zIndex = 1000;
+        flashLight.style.zIndex = 100;
         flashLight.style.pointerEvents = "none";
         flashLight.style.transformOrigin = "center";
         flashLight.style.transform = "translate(-50%, -50%)";
-        flashLight.style.background = "radial-gradient(rgba(0,0,0,0)"+(radius/10)+"%,rgba(0,0,0,0.25)"+(radius/5)+"%,rgba(0,0,0,0.7)"+(radius/2.5)+"%,rgba(0,0,0,1)"+(radius/2)+"%";
+        flashLight.style.background = "radial-gradient(rgba(0,0,0,0)"+(radius/10)+"%,rgba(0,0,0,0.25)"+(radius/5)+"%,rgba(0,0,0,0.7)"+(radius/2.5)+"%,rgba(0,0,0,1)"+(radius/2)+"%)";
         // and append it
         // maybe add a variable to the constructor to append it to an explicit element
         // Need to be stored global
@@ -162,8 +172,9 @@ class Visual{
             }
             flashLight.style.transformOrigin = "center";
         }
+        return tempname;
     }
-    spotLight( tempradius, tempcolor, tempposition, tempmouseAttach, tempmovement, PosX, PosY, tempduration){
+    spotLight( tempradius, tempcolor, tempposition, tempmouseAttach, PosX, PosY, tempduration){
         /* Methods for tempmovement
                  letiables here with temp --- to get no conflict with the names of the array
                  Array is more important than the Initialising
@@ -173,6 +184,7 @@ class Visual{
         // FLASHLIGHT[0][1].radius
 
         // Create a DOM-Element
+		let tempmovement = "";
         let spotLight = document.createElement("div");
 
         // Create the ID of the DOM-Element
@@ -231,8 +243,9 @@ class Visual{
             }
             spotLight.style.transformOrigin = "center";
         }
+        return tempname;
     }
-    softLight( tempradius, tempcolor, tempintensity, tempposition, tempmouseAttach, tempmovement, PosX, PosY, tempduration){
+    softLight( tempradius, tempcolor, tempintensity, tempposition, tempmouseAttach, PosX, PosY, tempduration){
         /* Methods for tempmovement
         Center | Left | Right | Top | Bottom | LeftBottom | RightBottom | LeftTop | RightTop
                  letiables here with temp --- to get no conflict with the names of the array
@@ -243,6 +256,7 @@ class Visual{
         // FLASHLIGHT[0][1].radius
 
         // Create a DOM-Element
+		let tempmovement = "";
         let softLight = document.createElement("div");
 
         // Create the ID of the DOM-Element
@@ -302,25 +316,22 @@ class Visual{
             }
             softLight.style.transformOrigin = "center";
         }
+        return tempname;
     }
-    startLight(id, move, speed, yoyo){
+    startLight(id, {move: {x: x = undefined, y: y = undefined}} = move, speed, yoyo){
         if(id != undefined){
             // Single Light move
             // Check if Mouse Attched
             if(LIGHTS[id].mouseAttach){
                 console.error("Object: "+LIGHTS[id].type+LIGHTS[id].name+" is attached to the Mouse"+
-                "\n Something like this is deactivated!\n    Were Sorry");
+                "\n Something like this is deactivated!\n    I´m Sorry");
             } else {
-                let obj = document.getElementById((LIGHTS[id].type+id));
+                let obj = document.getElementById(LIGHTS[id].type+id);
                 let ReposX, ReposY;
                 speed = speed;
-                move = move;
                 // Check if variables given
                 if(speed===undefined){
                     speed = LIGHTS[id].duration;
-                }
-                if(move===undefined){
-                    move = LIGHTS[id].movement;
                 }
                 if(yoyo){
                     ReposX = obj.style.left;
@@ -334,36 +345,13 @@ class Visual{
                 }
                 // Presets
                 setTimeout(() => {
-                    if(move=="center"){
-                        obj.style.top = "50%";
-                        obj.style.left = "50%";
-                    } else if(move=="right"){
-                        obj.style.top = "50%";
-                        obj.style.left = "100%";
-                    } else if(move=="left"){
-                        obj.style.top = "50%";
-                        obj.style.left = "0%";
-                    } else if(move=="top"){
-                        obj.style.top = "0%";
-                        obj.style.left = "50%";
-                    } else if(move=="bottom"){
-                        obj.style.top = "100%";
-                        obj.style.left = "50%";
-                    } else if(move=="leftTop"){
-                        obj.style.top = "0%";
-                        obj.style.left = "0%";
-                    } else if(move=="rightTop"){
-                        obj.style.top = "0%";
-                        obj.style.left = "100%";
-                    } else if(move=="leftBottom"){
-                        obj.style.top = "100%";
-                        obj.style.left = "0%";
-                    } else if(move=="rightBottom"){
-                        obj.style.top = "100%";
-                        obj.style.left = "100%";
+                    if(x != undefined){
+                        obj.style.left = x;
                     }
-                }, 10);
-
+                    if(y != undefined){
+                        obj.style.top = y;
+                    }
+                })
                 // Yoyo
                 if(yoyo){
                     setTimeout(() => {
@@ -376,11 +364,12 @@ class Visual{
             // All Lights move
             if(MESSAGES){
                 console.warn("Your starting every Light Movement at once."+
-                "\n to Select a special Light enter the Number from the ID!"+
-                "\n\n <div id='spotLight23'> then take the 23 to get this FlashLight")
+                "\nto Select a special Light enter the Number from the ID!"+
+                "\n\n<div id='spotLight23'> then take the 23 to get this Light\n\n\n"+
+                "Or just simple call put the light in a Variable and then call the Method with the Variable!")
             }
             for(let i = 0; i < LIGHTS.length; i++){
-                let obj = document.querySelector(LIGHTS[i].name);
+                let obj = document.querySelector("#"+LIGHTS[i].type+LIGHTS[i].name);
                 // Check if variables given
                 if(speed===undefined){
                     let speed = LIGHTS[i].duration;
@@ -555,6 +544,7 @@ class Particle{
                 connectNear: this.connectNear,
                 connectRadius: this.connectRadius,
                 counter: 0,
+                canvas: CANVAS,
                 avoidCounter: 0
             })
         }
@@ -692,12 +682,13 @@ class Particle{
     render( speed, curve){
         if(speed === undefined){
             speed=Math.random()*50;
-            console.error("No Speed given :("+
-            "\n I set the Speed to: "+speed);
+            SPEED = speed
+            console.error("No SPEED given :("+
+            "\n I set the SPEED to: "+SPEED);
         }
-        speed=speed/10;
+        SPEED=speed/10;
         if(MESSAGES){
-            console.log("Speed: "+speed)
+            console.log("SPEED: "+SPEED)
         }
         function render() {
             // Retry for ervery particle
@@ -713,6 +704,20 @@ class Particle{
                 let PosY = PARTICLE[i].PosY;
                 let counter = PARTICLE[i].counter;
                 let end, middle;
+
+                // Get the right Canvas
+                if(i == 0){
+                    CANVAS =  PARTICLE[i].canvas;
+                    CTX.clearRect(0,0,CANVAS.width, CANVAS.height);
+                    CTX = CANVAS.getContext("2d");
+                } else 
+                if(!(PARTICLE[i].canvas == PARTICLE[i-1].canvas)){
+                    CANVAS =  PARTICLE[i-1].canvas;
+                    CTX.clearRect(0,0,CANVAS.width, CANVAS.height);
+                    CANVAS =  PARTICLE[i].canvas;
+                    CTX = CANVAS.getContext("2d");
+                }
+                
                 // Curves will come later
                 if(curve === undefined){
                     // Border Collision
@@ -731,14 +736,14 @@ class Particle{
                         }
                         // for borderhitted
                         if(negativeX && counter == 0){
-                            // Set the new cords depending on the Speed
-                            end = start-speed;
+                            // Set the new cords depending on the SPEED
+                            end = start-SPEED;
                         } else if(!negativeX && counter == 0){
-                            end = speed+start;
+                            end = SPEED+start;
                         } else if(negativeX){
-                            end = speed+start;
+                            end = SPEED+start;
                         } else if(!negativeX){
-                            end = start-speed;
+                            end = start-SPEED;
                         } 
                         // If Top or Bottom border
                         if((PosY+radius) > window.innerHeight && counter == 0){
@@ -754,20 +759,20 @@ class Particle{
                         }
                         // for borderhitted
                         if(negativeY && counter == 0){
-                            // Set the new cords depending on the Speed
-                            middle = (speed+Math.round(Math.random())*0.5)+PosY;
+                            // Set the new cords depending on the SPEED
+                            middle = (SPEED+Math.round(Math.random())*0.5)+PosY;
                         } else if(!negativeY && counter == 0){
-                            middle = PosY-(speed+Math.round(Math.random())*0.5);
+                            middle = PosY-(SPEED+Math.round(Math.random())*0.5);
                         } else if(negativeY){
-                            middle = PosY-(speed+Math.round(Math.random())*0.5);
+                            middle = PosY-(SPEED+Math.round(Math.random())*0.5);
                         } else if(!negativeY){
-                            middle = (speed+Math.round(Math.random())*0.5)+PosY;
+                            middle = (SPEED+Math.round(Math.random())*0.5)+PosY;
                         } 
                     } else
                     // Dont work atm
                     if(!collisionBorder){
-						end = start+speed;
-						middle = PosY+speed
+						end = start+SPEED;
+						middle = PosY+SPEED
                         // reset if border hitted
                         if((start+radius) > window.innerWidth){
                             end=Math.round( Math.random()*window.innerWidth*1.5)-window.innerWidth;
@@ -795,19 +800,19 @@ class Particle{
                                 }
                             }
                             if(end > mouseX){
-                                end = end+(mouseRadius/distance)*speed;
+                                end = end+(mouseRadius/distance)*SPEED;
                             } else 
                             //left
                             if(end < mouseX){
-                                end = end-(mouseRadius/distance)*speed;
+                                end = end-(mouseRadius/distance)*SPEED;
                             }
                             // top
                             if(middle < mouseY){
-                                middle = middle-(mouseRadius/distance)*speed;
+                                middle = middle-(mouseRadius/distance)*SPEED;
                             } else 
                             // bottom
                             if(middle > mouseY){
-                                middle = middle+(mouseRadius/distance)*speed;
+                                middle = middle+(mouseRadius/distance)*SPEED;
                             }
                             if(PARTICLE[i].avoidCounter >= 100 && !collisionOther){
                                 if(Math.round(Math.random()) == 1){
@@ -933,11 +938,13 @@ class Particle{
         // Call with 60 FPS
         setInterval(() => {
             // but first clear
-            CTX.clearRect(0,0,CANVAS.width, CANVAS.height);
             render();
         }, 1000/60);
     }
     clear(){
         PARTICLE = [];
+    }
+    speed(speed){
+        SPEED=speed/10;
     }
 }

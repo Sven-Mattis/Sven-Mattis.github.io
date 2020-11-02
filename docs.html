@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+		
+		<!-- Loading SVG and Style Sheet -->
+		<div id="loading">
+			<svg id="loading-img" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M4.348 21.241l4.185-7.249 5.67 9.806c-.714.133-1.45.202-2.203.202-2.907 0-5.575-1.036-7.652-2.759zm18.97-5.247c-1.182 3.345-3.806 6.012-7.124 7.252l-4.187-7.252h11.311zm-14.786-6l-5.656 9.797c-1.793-2.097-2.876-4.819-2.876-7.791 0-.684.057-1.354.167-2.006h8.365zm12.583-5.795c1.798 2.098 2.885 4.824 2.885 7.801 0 .679-.057 1.345-.165 1.994h-8.373l5.653-9.795zm-11.305-3.999c.71-.131 1.442-.2 2.19-.2 2.903 0 5.566 1.033 7.642 2.751l-4.18 7.24-5.652-9.791zm2.19 7.794h-11.314c1.186-3.344 3.812-6.008 7.132-7.244l4.182 7.244z"/></svg>	
+		</div>
+		<link rel="stylesheet" type="text/css" charset="utf-8" href="css/load.css">
+		
+        <script src="js/visual.js"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" charset="utf-8" href="css/main.css"> 
+        <canvas id="particle">
+            <!-- The Canvas for Particles Postiton will always fixed and 100% 100%-->
+            Sorry, your Browser does not support Canvas. Plase Switch and come back.
+        </canvas>
+        
+        <p id="clickNotice">Click the Text below</p>
+        <p id="startVisual" onclick="start()">Docs VisualJS</p>
+
+
+
+		<section id="mainSite">
+			<div id="nav" class="">
+				<ul id="navbarLinks">
+					<p style="display: block; position: absolute; left: 10px; top: 10px; font-size: 12px; border: none;">Version: 0.1.0</p>
+					<li style="margin-left: 10%;"><a href="index.html">Home</a></li>
+					<p>&nbsp;</p>
+					<li><a href="example.html">Examples</a></li>
+					<p>&nbsp;</p>
+					<li class="active" style="margin-right: 10%;"><a href="docs.html">Docs</a></li>
+				<ul>
+            </div>
+            <canvas id="startCanvas"></canvas>	
+            <p id="startVisual" style="z-index: 1; position: absolute; transform: translate(-50%, -150%);">Docs VisualJS</p>
+            <section id="siteContent">
+                <div class="content" style="top: 105%;">
+					<div class="content-text" style="max-width: 1400px;">
+                        <p class="header">
+                            Getting Started
+                        </p>
+                        <p class="header">
+                            Scene
+                        </p>
+						<p class="text code" style="font-weight: 500; text-align: left; font-family: Arial, Helvetica, sans-serif;">
+							Create a Scene<br><br>
+                            let visual = new Visual ( mouseRadius, canvasName, z-index, backgroundColor, messages);<br>
+                            new Visual ( Integer, String, Integer, String, Boolean);
+							<br><br><br><br>
+							Create Lights<br><br>
+							visual.softLight( radius, Color, intensity, position, attachMouse, PosX, PosY);<br>
+							variable.softLight( Integer, String, Integer, String, Boolean, Integer, Integer);<br><br>
+							visual.spotLight( radius, Color, intensity, position, attachMouse, PosX, PosY);<br>
+							variable.spotLight( Integer, String, Integer, String, Boolean, Integer, Integer);<br><br>
+							visual.flashLight( radius, Color, intensity, position, attachMouse, PosX, PosY);<br>
+							variable.flashLight( Integer, String, Integer, String, Boolean, Integer, Integer);<br><br>
+							<br><br>Move Lights<br><br>
+							visual.startLight( id, {move: {x: PosX, y: PosY}}, duration, yoyo);
+							visual.startLight( String, {move: {x: Integer, y: Integer}}, Integer, Boolean);<br><br><br>
+							Create Particles<br><br>
+							let particle = new Particle({ 
+								amount: Amount,
+								color: Color,
+								radius: radius,
+								pos: {
+								  x: PosX,
+								  y: PosY
+								},
+								collision: {
+								  collisionMouse: CollisionMouse,
+								  collisionBorder: CollisionBorder,
+								  collisionOther: CollisionOther
+								},
+								connect: {
+								  connectColor: ConnectColor,
+								  connectNear: ConnectNear,
+								  connectMouse: ConnectMouse,
+								  connectRadius: ConnectRadius
+								},
+								negativeX: NegativeX,
+								negativeY: NegativeY
+							  });
+							
+						<p>
+					<div>
+				</div>
+            </section>
+			<section id="footer">
+				<p>&nbsp;&nbsp;&nbsp; &copy; Sven-Mattis Rackow 2020</p>
+			</section>
+		</section>
+    </body>
+    <script src="js/docs.js"></script>
+    <script src="js/autostart.js"></script>
+</html>

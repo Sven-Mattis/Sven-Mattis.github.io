@@ -1,50 +1,36 @@
-let firstLight, secondLight, thirdLight, fourthLight;
+let firstLight, secondLight, thirdLight, fourthLight, vis, part, scrolled=false;
 window.onload = async function() {
-    vis = new Visual(200, "#particle", -10, "black");
-    part = new Particle({
-      amount: 25,
-      color: "transparent",
-      pos: {
-        x: 199,
-        y: 99
-      },
-      collision: {
-        collisionMouse: false,
-        collisionOther: false,
-        collisionBorder: true
-      },
-      radius: 100,
-      type: "hard",
-      connect: {
-        connectColor: "rgba(255,255,255,0.15)",
-        connectNear: false,
-		    connectMouse: true,
-        connectRadius: 1000
-      }
-    });
-  part.render(8);
+  setInterval(() => {
+    if(window.pageYOffset < window.innerHeight-100 && !(scrolled)){
+      window.scrollBy(0,window.pageYOffset/40+1);
+    } else if(!scrolled) {
+      scrolled=true
+    }
+    console.log(scrolled)
+  }, 25);
+  start();
+  part.render(100);
+  setTimeout(() => {
+    document.getElementById("preloader").style.transition = "0.5s";
+    document.getElementById("preloader").style.bottom = "-100%";
+    setTimeout(() => {
+      document.getElementById("preloader").style.display = "none";
+    }, 1500);
+  }, 1000)
 }
 function start(){
-  vis.reset();
-	part.clear();
-	document.getElementById("startVisual").style.transition = "linear 1s";
-	document.getElementById("startVisual").style.transform = "scale(1000)";
-	setTimeout(() => {
-  document.getElementById("startVisual").style.display = "none";
   topCanvas();
   vis.flashLight(45, "absolute", 5000, 5000, true);
   firstLight = vis.softLight(100, "rgba(255, 0, 0, 0.5)", 40, "fixed", false, "middle", 10, 120);
-  secondLight = vis.softLight(100,"rgba(255, 20, 0, 0.5)", 30, "fixed", false, "middle", 20, 150);
+  secondLight = vis.softLight(100,"rgba(255, 200, 0, 0.52))", 30, "fixed", false, "middle", 20, 150);
   thirdLight = vis.softLight(100, "rgba(255, 200, 0, 0.52)", 50, "fixed", false, "middle", 80, 110);
-  fourthLight = vis.softLight(100,"rgba(255, 0, 100, 0.55)", 40, "fixed", false, "middle", 30, 120);
-  fithLight = vis.softLight(100,  "rgba(25, 255, 0, 0.65)", 70, "fixed", false, "middle", 70, 190);
+  fourthLight = vis.softLight(100,"rgba(255, 200, 0, 0.52)", 40, "fixed", false, "middle", 30, 120);
+  fithLight = vis.softLight(100,  "rgba(255, 200, 0, 0.52)", 70, "fixed", false, "middle", 70, 190);
   sixthLight = vis.softLight(100, "rgba(255, 0, 100, 0.6)", 60, "fixed", false, "middle", 10, 110);
   eigthLight = vis.softLight(100, "rgba(255, 0, 0, 0.5)", 80, "fixed", false, "middle", 50, 160);
   ninthLight = vis.softLight(100, "rgba(255, 0, 0, 0.4)", 20, "fixed", false, "middle", 60, 180);
   moveLights();
   document.getElementById("mainSite").style.display = "block";
-	}, 1000)
-  document.getElementById("clickNotice").style.display = "none";
   part.speed(100)
   let links = document.querySelectorAll("a");
   document.getElementById("navbarLinks").style.color = "white";
@@ -102,7 +88,7 @@ function moveLights() {
   vis.startLight(ninthLight, {move: {x: window.pageYOffset/200+"%", y: window.pageYOffset/800+"%"}}, 0.00000000000000000000000000000001, false);
 }
 function topCanvas(){
-  let vis = new Visual(200, "#startCanvas", -1, "black");
+  vis = new Visual(200, "#startCanvas", 4, "black", false);
   part = new Particle({
     amount: 200,
     color: "orangered",

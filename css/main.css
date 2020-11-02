@@ -7,6 +7,7 @@ body{
 }
 
 #startVisual{
+    z-index: 5;
     transition: 0.5s;
     position: fixed;
     top: 50%;
@@ -63,7 +64,7 @@ body{
 
 /* Main Site */
 #mainSite{
-	display: none;
+	display: block;
 	height: 100%;
 	right: 0px;
 	left: 0px;
@@ -137,8 +138,8 @@ a {
     top: -10px !important;
     display: block;
     position: relative !important;
-    box-shadow: -10px 15px 10px black;
-    z-index: -1;
+    box-shadow: -10px 10px 10px black;
+    z-index: 0;
 }
 
 

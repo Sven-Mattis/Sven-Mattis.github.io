@@ -5,7 +5,6 @@ for(var j = 0; j < codeblock.length; j++){
     let text = codeblock[j].innerHTML;
 	let words = text.split(" ");
 	let newString = "";
-	console.log(words)
 	for(var i = 0; i < words.length; i++){
 		var substring = words[i];
 		substring = words[i].replace("new", "<span style='color: blue'>new</span>")
@@ -62,6 +61,5 @@ for(var j = 0; j < codeblock.length; j++){
 		newString += "&nbsp;";
 		}
 	}
-	console.log(newString);
     codeblock[j].innerHTML = newString;
 }
